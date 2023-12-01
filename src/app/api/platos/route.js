@@ -3,9 +3,6 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 export async function GET() {
- const categorias = await prisma.categorias.findMany()
- return NextResponse.json(categorias)
+ const platos = await prisma.categorias.findMany()
+ return NextResponse.json(platos)
 }
-
-
-
