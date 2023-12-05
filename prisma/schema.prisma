@@ -19,6 +19,7 @@ model Categorias {
 model SubCategorias {
   id String @id @default(uuid())
   nombre String
+  descripcion String?
   categoria Categorias @relation(fields: [categoriaId],references: [id])
   categoriaId String
   platos Platos[]

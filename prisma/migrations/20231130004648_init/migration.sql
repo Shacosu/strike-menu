@@ -22,3 +22,4 @@ CREATE TABLE "Platos" (
     "subcategoriaId" TEXT NOT NULL,
     CONSTRAINT "Platos_subcategoriaId_fkey" FOREIGN KEY ("subcategoriaId") REFERENCES "SubCategorias" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
+ALTER TABLE "SubCategorias" ADD COLUMN "descripcion" TEXT;
