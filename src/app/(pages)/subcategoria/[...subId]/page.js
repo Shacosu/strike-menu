@@ -1,37 +1,40 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
+// Función para truncar la descripción a un número específico de palabras
+
+
 // Definición de los componentes
-const Card = ({ plato }) => {
-	const [expanded, setExpanded] = useState(false);
-	const toggleDetails = () => {
-    setExpanded(!expanded);
-  };
+const Card = ({ plato, openModal }) => {
+ 
+
   return (
-		<div
-		onClick={toggleDetails}
-		key={plato.id}
-		className="bg-black border-2 border-[#ed6928] mt-3 shadow-lg text-white rounded-lg flex overflow-hidden"
-	>
-		<div className="p-4 flex-1">
-			<div className="text-2xl font-bold mb-2">{plato.nombre}</div>
-			<div className="text-lg mb-2">${plato.precio}</div>
-			<div className="text-gray-400 cursor-pointer">
-				{expanded ? "Ocultar detalles" : "Ver detalles"}
-			</div>
-			{expanded && <div className="text-gray-400">{plato.descripcion}</div>}
-		</div>
-		<img src={plato.imagen} alt={plato.nombre} className="w-40 h-40 object-cover" />
-	</div>
+    <div
+      className="bg-black border-2 border-[#ed6928] mt-3 shadow-lg text-white rounded-lg flex overflow-hidden"
+      onClick={() => openModal(plato)}
+    >
+      <div className="p-2 flex-1 h-40 w-40 " >
+        <div className="text-lg font-bold">{plato.nombre}</div>
+        <div className="text-gray-400 line-clamp-3">{plato.descripcion}</div>
+        <div className="text-base mt-1">${plato.precio}</div>
+      </div>
+        
+        
+      <img
+        src={plato.imagen}
+        alt={plato.nombre}
+        className="w-40 object-cover"
+      />
+    </div>
   );
 };
 
-const PlatoList = ({ platos }) => {
+const PlatoList = ({ platos, openModal }) => {
   return (
     <div className="grid grid-cols-1 gap-4 mt-2 container mx-auto px-3">
-      {platos.map(plato => (
-        <Card key={plato.id} plato={plato} />
+      {platos.map((plato) => (
+        <Card key={plato.id} plato={plato} openModal={openModal} />
       ))}
     </div>
   );
@@ -41,6 +44,7 @@ const PlatoList = ({ platos }) => {
 export default function subcategoria({ params }) {
   const id = params.subId[0];
   const [platos, setPlatos] = useState([]);
+  const [selectedPlato, setSelectedPlato] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -48,7 +52,14 @@ export default function subcategoria({ params }) {
       .then((res) => res.json())
       .then((data) => setPlatos(data));
   }, []);
-	console.log(setPlatos)
+
+  const openModal = (plato) => {
+    setSelectedPlato(plato);
+  };
+
+  const closeModal = () => {
+    setSelectedPlato(null);
+  };
 
   return (
     <div>
@@ -56,8 +67,38 @@ export default function subcategoria({ params }) {
         BIENVENIDOS A LA EXPERIENCIA STRIKE
       </h1>
       <h2 className="text-center mt-8 text-2xl font-bold">CARTA</h2>
-      <PlatoList platos={platos} />
+      <PlatoList platos={platos} openModal={openModal} />
+
+      {/* Modal */}
+      {selectedPlato && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="absolute inset-0 bg-black opacity-50"></div>
+          <div
+            className="bg-[#414447] p-3 rounded-lg z-10"
+            style={{ width: "400px" }}
+          >
+            <div className="relative" style={{ paddingTop: "56.25%" }}>
+              <iframe
+                className="absolute top-0 left-0 w-full h-full"
+                src={`${selectedPlato.video}?autoplay=1&modestbranding=1&controls=0&showinfo=0&rel=0`}
+                
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <h2 className="text-2xl font-bold mb-2 mt-2 text-white">
+              {selectedPlato.nombre}
+            </h2>
+            <p className="text-white-600">{selectedPlato.descripcion}</p>
+            <button
+              className="mt-4 float-right bg-[#ed6928] text-white py-2 px-4 rounded hover:bg-[#e05600] transition duration-300"
+              onClick={closeModal}
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
-
