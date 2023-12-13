@@ -16,15 +16,16 @@ const Card = ({ plato, openModal }) => {
     >
       <div className="p-2 flex-1 h-40 w-40 " >
         <div className="text-lg font-bold">{plato.nombre}</div>
-        <div className="text-gray-400 line-clamp-3">{plato.descripcion}</div>
         <div className="text-base mt-1">${plato.precio}</div>
+        <div className="text-gray-400 line-clamp-3">{plato.descripcion}</div>
+        
       </div>
         
         
       <img
         src={plato.imagen}
         alt={plato.nombre}
-        className="w-40 object-cover"
+        className="w-36 object-cover"
       />
     </div>
   );

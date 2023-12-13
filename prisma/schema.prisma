@@ -1,37 +1,35 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
+
 model Categorias {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
   nombre String
   subcategorias SubCategorias[]
 }
 
 model SubCategorias {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
   nombre String
   descripcion String?
-  categoria Categorias @relation(fields: [categoriaId],references: [id])
-  categoriaId String
+  categoria Categorias @relation(fields: [categoriaId], references: [id])
+  categoriaId Int
   platos Platos[]
 }
 
 model Platos {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
   nombre String
   precio Int
   descripcion String
   imagen String
   video String?
-  subcategoria SubCategorias @relation(fields: [subcategoriaId],references: [id])
-  subcategoriaId String
+  subcategoria SubCategorias @relation(fields: [subcategoriaId], references: [id])
+  subcategoriaId Int
 }

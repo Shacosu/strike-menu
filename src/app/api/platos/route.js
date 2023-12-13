@@ -7,30 +7,14 @@ export async function GET(request) {
   const params = new URLSearchParams(url.search);
   const subcategoriaId = params.get("id");
 
+  // Convierte el subcategoriaId a un número entero
+  const subcategoriaIdAsInt = parseInt(subcategoriaId, 10);
+
   const platosDeSubcategoria = await prisma.platos.findMany({
     where: {
-      subcategoriaId: subcategoriaId,
+      subcategoriaId: subcategoriaIdAsInt,
     },
   });
 
   return NextResponse.json(platosDeSubcategoria);
-}
-
-export async function POST(request) {
-  try {
-    // Parsea el cuerpo JSON de la solicitud
-    const data = await json(request);
-
-    // Crea un nuevo plato en la base de datos
-    const nuevoPlato = await prisma.platos.create({
-      data,
-    });
-
-    // Retorna una respuesta JSON con el nuevo plato creado
-    return NextResponse.json(nuevoPlato, { status: 201 });
-  } catch (error) {
-    // Maneja errores y retorna una respuesta con el código de error apropiado
-    console.error("Error al agregar un nuevo plato:", error);
-    return NextResponse.json({ error: error.message }, { status: error.status || 500 });
-  }
 }
