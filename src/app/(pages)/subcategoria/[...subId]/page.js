@@ -7,40 +7,9 @@ import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid'
 
 
 // Definición de los componentes
-const Card = ({ plato, openModal }) => {
- 
 
-  return (
-    <div
-      className="bg-black border-2 border-[#ed6928] mt-3 shadow-lg text-white rounded-lg flex overflow-hidden"
-      onClick={() => openModal(plato)}
-    >
-      <div className="p-2 flex-1 h-40 w-40 " >
-        <div className="text-lg">{plato.nombre}</div>
-        <div className="text-base mt-1">${plato.precio}</div>
-        <div className="text-gray-400 line-clamp-3">{plato.descripcion}</div>
-        
-      </div>
-        
-        
-      <img
-        src={plato.imagen}
-        alt={plato.nombre}
-        className="w-36 object-cover"
-      />
-    </div>
-  );
-};
 
-const PlatoList = ({ platos, openModal }) => {
-  return (
-    <div className="grid grid-cols-1 gap-4 mt-2 container mx-auto px-3">
-      {platos.map((plato) => (
-        <Card key={plato.id} plato={plato} openModal={openModal} />
-      ))}
-    </div>
-  );
-};
+
 
 // Componente principal
 export default function subcategoria({ params }) {
@@ -61,6 +30,39 @@ export default function subcategoria({ params }) {
 
   const closeModal = () => {
     setSelectedPlato(null);
+  };
+  const PlatoList = ({ platos, openModal }) => {
+    return (
+      <div className="grid grid-cols-1 gap-4 mt-2 container mx-auto px-3">
+        {platos.map((plato) => (
+          <Card key={plato.id} plato={plato} openModal={openModal} />
+        ))}
+      </div>
+    );
+  };
+  const Card = ({ plato, openModal }) => {
+ 
+
+    return (
+      <div
+        className="bg-black border-2 border-[#ed6928] mt-3 shadow-lg text-white rounded-lg flex overflow-hidden"
+        onClick={() => openModal(plato)}
+      >
+        <div className="p-2 flex-1 h-40 w-40 " >
+          <div className="text-lg">{plato.nombre}</div>
+          <div className="text-base mt-1">${plato.precio}</div>
+          <div className="text-gray-400 line-clamp-3">{plato.descripcion}</div>
+          
+        </div>
+          
+          
+        <img
+          src={plato.imagen}
+          alt={plato.nombre}
+          className="w-36 object-cover"
+        />
+      </div>
+    );
   };
 
   return (
@@ -107,4 +109,5 @@ export default function subcategoria({ params }) {
     </div>
     </div>
   );
+  
 }
