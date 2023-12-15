@@ -1,10 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid'
 
 
+
 export default function Subcategoria({ params }) {
+  
   const id = params.subId[0];
   const [platos, setPlatos] = useState([]);
   const [selectedPlato, setSelectedPlato] = useState(null);
@@ -16,13 +18,6 @@ export default function Subcategoria({ params }) {
       .then((data) => setPlatos(data));
   }, []);
 
-  const openModal = (plato) => {
-    setSelectedPlato(plato);
-  };
-
-  const closeModal = () => {
-    setSelectedPlato(null);
-  };
   const PlatoList = ({ platos, openModal }) => {
     return (
       <div className="grid grid-cols-1 gap-4 mt-2 container mx-auto px-3">
@@ -33,8 +28,6 @@ export default function Subcategoria({ params }) {
     );
   };
   const Card = ({ plato, openModal }) => {
- 
-
     return (
       <div
         className="bg-black border-2 border-[#ed6928] mt-3 shadow-lg text-white rounded-lg flex overflow-hidden"
@@ -46,8 +39,6 @@ export default function Subcategoria({ params }) {
           <div className="text-gray-400 line-clamp-3">{plato.descripcion}</div>
           
         </div>
-          
-          
         <img
           src={plato.imagen}
           alt={plato.nombre}
@@ -57,6 +48,14 @@ export default function Subcategoria({ params }) {
     );
   };
 
+  const openModal = (plato) => {
+    setSelectedPlato(plato);
+  };
+
+  const closeModal = () => {
+    setSelectedPlato(null);
+  };
+  
   return (
     <div>
       <h1 className="text-center mt-8 text-4xl bg-gradient-to-b bg-clip-text from-[#ed6928] via-orange-500 to-orange-100 text-transparent">
