@@ -1,18 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid'
 
-// Función para truncar la descripción a un número específico de palabras
 
-
-// Definición de los componentes
-
-
-
-
-// Componente principal
-export default function subcategoria({ params }) {
+export default function Subcategoria({ params }) {
   const id = params.subId[0];
   const [platos, setPlatos] = useState([]);
   const [selectedPlato, setSelectedPlato] = useState(null);
