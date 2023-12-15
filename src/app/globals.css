@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@200;300;400;500;600;700&display=swap');
+
+body, html, #root {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+/* Puedes definir estilos adicionales para otros elementos si es necesario */
+/* Por ejemplo, si deseas aplicar 'Yanone Kaffeesatz' a una clase específica, puedes hacer lo siguiente: */
+
+.custom-class {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+}

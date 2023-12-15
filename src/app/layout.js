@@ -11,7 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
-    <body className={`${inter.className} bg-cover bg-center bg-no-repeat min-h-screen text-white`} style={{ backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('https://w0.peakpx.com/wallpaper/463/807/HD-wallpaper-cafe-restaurant-bar-theme.jpg')" }}>
+    <body className={`${inter.className} bg-cover bg-center bg-no-repeat min-h-screen text-white font-yanone-kaffeesatz`} style={{ backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('https://w0.peakpx.com/wallpaper/463/807/HD-wallpaper-cafe-restaurant-bar-theme.jpg')" }}>
       {children}
     </body>
   </html>

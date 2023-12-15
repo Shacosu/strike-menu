@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid'
 
 // Función para truncar la descripción a un número específico de palabras
 
@@ -15,7 +16,7 @@ const Card = ({ plato, openModal }) => {
       onClick={() => openModal(plato)}
     >
       <div className="p-2 flex-1 h-40 w-40 " >
-        <div className="text-lg font-bold">{plato.nombre}</div>
+        <div className="text-lg">{plato.nombre}</div>
         <div className="text-base mt-1">${plato.precio}</div>
         <div className="text-gray-400 line-clamp-3">{plato.descripcion}</div>
         
@@ -49,7 +50,7 @@ export default function subcategoria({ params }) {
   const router = useRouter();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/platos?id=${id}`)
+    fetch(`/api/platos?id=${id}`)
       .then((res) => res.json())
       .then((data) => setPlatos(data));
   }, []);
@@ -64,10 +65,10 @@ export default function subcategoria({ params }) {
 
   return (
     <div>
-      <h1 className="text-center mt-8 text-3xl font-bold">
+      <h1 className="text-center mt-8 text-4xl bg-gradient-to-b bg-clip-text from-[#ed6928] via-orange-500 to-orange-100 text-transparent">
         BIENVENIDOS A LA EXPERIENCIA STRIKE
       </h1>
-      <h2 className="text-center mt-8 text-2xl font-bold">CARTA</h2>
+      <h2 className="text-center text-3xl font-bold my-5">CARTA</h2>
       <PlatoList platos={platos} openModal={openModal} />
 
       {/* Modal */}
@@ -87,7 +88,7 @@ export default function subcategoria({ params }) {
                 allowFullScreen
               ></iframe>
             </div>
-            <h2 className="text-2xl font-bold mb-2 mt-2 text-white">
+            <h2 className="text-2xl mb-2 mt-2 text-[#e05600]">
               {selectedPlato.nombre}
             </h2>
             <p className="text-white-600">{selectedPlato.descripcion}</p>
@@ -98,8 +99,12 @@ export default function subcategoria({ params }) {
               Cerrar
             </button>
           </div>
+          
         </div>
       )}
+      <div className="fixed bottom-4 left-4 text-xs w-14 h-14 text-[#e05600]">
+      <ArrowLeftCircleIcon onClick={() => router.back()} />
+    </div>
     </div>
   );
 }
