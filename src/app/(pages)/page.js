@@ -18,7 +18,7 @@ export default function Categorias() {
       <h1 className="text-center mt-8 text-4xl bg-gradient-to-b bg-clip-text from-[#ed6928] via-orange-500 to-orange-100 text-transparent">
         BIENVENIDOS A LA EXPERIENCIA STRIKE
       </h1>
-      <h2 className="text-center  text-3xl font-bold my-5  ">CARTA</h2>
+      <h2 className="text-center  text-3xl font-bold my-5">CARTA</h2>
       <div className="grid grid-cols-1 gap-4 container mx-auto px-9 ">
         {categorias.map((categoria) => (
           <div
