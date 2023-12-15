@@ -27,3 +27,4 @@ El proyecto utiliza Tailwind CSS para el diseño y ESLint para mantener un códi
 
    ```bash
    npx tailwindcss init -p
+"# strike" 
